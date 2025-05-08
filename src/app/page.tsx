@@ -18,7 +18,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
-              <span className="text-2xl font-bold neon-text">LinkFolio</span>
+              <span className="text-2xl font-bold neon-text">moneyba.gg</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
               <a href="#features" className="nav-link">Features</a>
@@ -297,7 +297,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-12">
             <div>
-              <h3 className="text-xl font-bold neon-text mb-4">LinkFolio</h3>
+              <h3 className="text-xl font-bold neon-text mb-4">moneyba.gg</h3>
               <p className="text-gray-500">Level up your digital presence with the ultimate portfolio platform.</p>
             </div>
             <div>
