@@ -59,9 +59,9 @@ export default function Home() {
                 <a href="/signup" className="button-primary text-lg px-8 py-4 bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">
                   Sign Up & Link
                 </a>
-                <button className="button-secondary text-lg px-8 py-4 border border-gray-700 hover:border-primary transition-colors">
-                  View Examples
-                </button>
+                <a href="/networks" className="button-secondary text-lg px-8 py-4 border border-gray-700 hover:border-primary transition-colors">
+                  Networks
+                </a>
               </div>
               <div className="mt-8 flex items-center space-x-6">
                 <div className="flex -space-x-2">
