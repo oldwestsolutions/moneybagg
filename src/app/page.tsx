@@ -24,13 +24,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">moneyba.gg</span>
+              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Moneyba.gg</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="nav-link hover:text-primary transition-colors">Features</a>
-              <a href="#pricing" className="nav-link hover:text-primary transition-colors">Pricing</a>
-              <a href="#testimonials" className="nav-link hover:text-primary transition-colors">Testimonials</a>
-              <button className="button-primary bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">Create Your Page</button>
+              <a href="/features" className="nav-link hover:text-primary transition-colors">Features</a>
+              <a href="/blockchain" className="nav-link hover:text-primary transition-colors">Blockchain</a>
+              <a href="/login" className="button-primary bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">Login</a>
             </div>
           </div>
         </div>
