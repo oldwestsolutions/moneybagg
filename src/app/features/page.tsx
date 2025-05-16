@@ -11,10 +11,25 @@ import {
   BoltIcon,
   ArrowRightIcon
 } from '@heroicons/react/24/outline';
+import Logo from '../components/Logo';
+import { useState } from 'react';
 
 export default function Features() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-bg to-gray-900">
+      {/* Navigation */}
+      <nav className="fixed w-full bg-dark-bg/90 backdrop-blur-md z-50 border-b border-gray-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            <div className="flex items-center">
+              <Logo />
+            </div>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="pt-40 pb-24 px-4 relative overflow-hidden">
         <div className="absolute inset-0">

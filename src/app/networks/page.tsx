@@ -12,8 +12,14 @@ import {
   RocketLaunchIcon,
   SparklesIcon
 } from '@heroicons/react/24/outline';
+import SearchBar from '../components/SearchBar';
+import { useState } from 'react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Logo from '../components/Logo';
 
 export default function Networks() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const platforms = [
     {
       category: "Professional Networks",
@@ -140,14 +146,47 @@ export default function Networks() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
-              <a href="/" className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Moneyba.gg</a>
+              <Logo />
             </div>
+            
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
+              <div className="w-64">
+                <SearchBar />
+              </div>
               <a href="/features" className="nav-link hover:text-primary transition-colors">Features</a>
               <a href="/blockchain" className="nav-link hover:text-primary transition-colors">Blockchain</a>
               <a href="/login" className="button-primary bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">Login</a>
             </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-gray-400 hover:text-white"
+              >
+                {mobileMenuOpen ? (
+                  <XMarkIcon className="h-6 w-6" />
+                ) : (
+                  <Bars3Icon className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <div className="md:hidden py-4">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <div className="mb-4">
+                  <SearchBar />
+                </div>
+                <a href="/features" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary">Features</a>
+                <a href="/blockchain" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary">Blockchain</a>
+                <a href="/login" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary">Login</a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
