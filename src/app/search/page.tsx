@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import SearchBar from '../components/SearchBar';
 import { 
   BriefcaseIcon, 
@@ -69,7 +69,7 @@ const mockData = {
   ]
 };
 
-export default function Search() {
+function SearchContent() {
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
   const [results, setResults] = useState<any[]>([]);
@@ -78,7 +78,6 @@ export default function Search() {
   useEffect(() => {
     if (query) {
       setLoading(true);
-      // Simulate API call
       setTimeout(() => {
         const filteredResults = mockData.platforms.filter(platform => 
           platform.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -91,6 +90,53 @@ export default function Search() {
     }
   }, [query]);
 
+  return (
+    <section className="py-12 px-4">
+      <div className="max-w-7xl mx-auto">
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+            <p className="mt-4 text-gray-400">Searching...</p>
+          </div>
+        ) : query ? (
+          <>
+            <p className="text-gray-400 mb-8">
+              Found {results.length} results for "{query}"
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {results.map((result, index) => (
+                <div 
+                  key={index}
+                  className="p-6 rounded-xl bg-card-bg/30 backdrop-blur-sm border border-gray-800/50 hover:border-primary/50 transition-colors"
+                >
+                  <div className="flex items-center mb-4">
+                    {result.icon}
+                    <div className="ml-4">
+                      <h3 className="text-xl font-bold">{result.name}</h3>
+                      <p className="text-sm text-gray-400">{result.category}</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-300">{result.description}</p>
+                </div>
+              ))}
+            </div>
+            {results.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-gray-400">No results found. Try different keywords.</p>
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-gray-400">Enter a search term to find platforms and features.</p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+export default function Search() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-bg to-gray-900">
       {/* Navigation */}
@@ -127,49 +173,9 @@ export default function Search() {
         </div>
       </section>
 
-      {/* Results Section */}
-      <section className="py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-          {loading ? (
-            <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-              <p className="mt-4 text-gray-400">Searching...</p>
-            </div>
-          ) : query ? (
-            <>
-              <p className="text-gray-400 mb-8">
-                Found {results.length} results for "{query}"
-              </p>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {results.map((result, index) => (
-                  <div 
-                    key={index}
-                    className="p-6 rounded-xl bg-card-bg/30 backdrop-blur-sm border border-gray-800/50 hover:border-primary/50 transition-colors"
-                  >
-                    <div className="flex items-center mb-4">
-                      {result.icon}
-                      <div className="ml-4">
-                        <h3 className="text-xl font-bold">{result.name}</h3>
-                        <p className="text-sm text-gray-400">{result.category}</p>
-                      </div>
-                    </div>
-                    <p className="text-gray-300">{result.description}</p>
-                  </div>
-                ))}
-              </div>
-              {results.length === 0 && (
-                <div className="text-center py-12">
-                  <p className="text-gray-400">No results found. Try different keywords.</p>
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-400">Enter a search term to find platforms and features.</p>
-            </div>
-          )}
-        </div>
-      </section>
+      <Suspense>
+        <SearchContent />
+      </Suspense>
 
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-400 py-16 border-t border-gray-800/50 mt-12">
