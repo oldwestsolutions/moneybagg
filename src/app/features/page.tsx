@@ -9,7 +9,9 @@ import {
   UserGroupIcon,
   ShieldCheckIcon,
   BoltIcon,
-  ArrowRightIcon
+  ArrowRightIcon,
+  Bars3Icon,
+  XMarkIcon
 } from '@heroicons/react/24/outline';
 import Logo from '../components/Logo';
 import { useState } from 'react';
@@ -26,7 +28,41 @@ export default function Features() {
             <div className="flex items-center">
               <Logo />
             </div>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="/features" className="nav-link hover:text-primary transition-colors">Features</a>
+              <a href="/blockchain" className="nav-link hover:text-primary transition-colors">Blockchain</a>
+              <a href="/create" className="nav-link hover:text-primary transition-colors">Create</a>
+              <a href="/login" className="button-primary bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">Login</a>
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-gray-400 hover:text-white"
+              >
+                {mobileMenuOpen ? (
+                  <XMarkIcon className="h-6 w-6" />
+                ) : (
+                  <Bars3Icon className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Navigation */}
+          {mobileMenuOpen && (
+            <div className="md:hidden py-4">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <a href="/features" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary">Features</a>
+                <a href="/blockchain" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary">Blockchain</a>
+                <a href="/create" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary">Create</a>
+                <a href="/login" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary">Login</a>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -37,15 +73,23 @@ export default function Features() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.15),transparent_50%)]"></div>
         </div>
         <div className="max-w-7xl mx-auto relative">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
               Powerful Features
-              <span className="gradient-text block mt-2">For Your Digital Presence</span>
+              <span className="gradient-text block mt-4">For Your Digital Presence</span>
             </h1>
-            <p className="text-xl text-gray-400 mb-8">
+            <p className="text-xl text-gray-400 mb-12 leading-relaxed">
               Transform your digital identity into a powerful hub that connects all your platforms. 
               From social media to DeFi achievements, showcase everything in one stunning, customizable space.
             </p>
+            <div className="flex justify-center gap-4">
+              <a href="/signup" className="button-primary text-lg px-8 py-4 bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">
+                Get Started
+              </a>
+              <a href="/networks" className="button-secondary text-lg px-8 py-4 border border-gray-700 hover:border-primary transition-colors">
+                View Networks
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -54,8 +98,8 @@ export default function Features() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="section-title">Core Features</h2>
-            <p className="section-subtitle">Everything you need to build your digital presence</p>
+            <h2 className="text-4xl font-bold mb-4">Core Features</h2>
+            <p className="text-xl text-gray-400">Everything you need to build your digital presence</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -78,7 +122,10 @@ export default function Features() {
                 stats: "Real-time Stats"
               }
             ].map((feature, index) => (
-              <div key={index} className="p-6 rounded-2xl bg-card-bg/30 backdrop-blur-sm border border-gray-800/50 hover:border-primary/50 transition-colors">
+              <div 
+                key={index} 
+                className="p-8 rounded-2xl bg-card-bg/30 backdrop-blur-sm border border-gray-800/50 hover:border-primary/50 transition-all duration-300 hover:transform hover:scale-105"
+              >
                 <div className="w-16 h-16 rounded-xl bg-primary/20 flex items-center justify-center mb-6">
                   {feature.icon}
                 </div>
@@ -95,8 +142,8 @@ export default function Features() {
       <section className="py-24 bg-gradient-to-b from-gray-900 to-dark-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="section-title">Platform Integration</h2>
-            <p className="section-subtitle">Connect and conquer across all platforms</p>
+            <h2 className="text-4xl font-bold mb-4">Platform Integration</h2>
+            <p className="text-xl text-gray-400">Connect and conquer across all platforms</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -119,7 +166,10 @@ export default function Features() {
                 stats: "1B+ Monthly Users"
               }
             ].map((platform, index) => (
-              <div key={index} className="p-6 rounded-2xl bg-card-bg/30 backdrop-blur-sm border border-gray-800/50 hover:border-primary/50 transition-colors">
+              <div 
+                key={index} 
+                className="p-8 rounded-2xl bg-card-bg/30 backdrop-blur-sm border border-gray-800/50 hover:border-primary/50 transition-all duration-300 hover:transform hover:scale-105"
+              >
                 <div className="w-16 h-16 rounded-xl bg-primary/20 flex items-center justify-center mb-6">
                   {platform.icon}
                 </div>
@@ -135,21 +185,21 @@ export default function Features() {
       {/* DeFi Features */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <h3 className="text-4xl font-bold mb-6">DeFi Achievement System</h3>
-              <p className="text-xl text-gray-400 mb-8">
+              <p className="text-xl text-gray-400 mb-8 leading-relaxed">
                 Track your crypto journey with our gamified achievement system. Showcase your trading prowess, NFT collection, and DeFi contributions.
               </p>
-              <ul className="space-y-4">
+              <ul className="space-y-6">
                 {[
                   'Trading volume milestones',
                   'NFT collection showcase',
                   'DeFi protocol contributions',
                   'Community engagement metrics'
                 ].map((feature, index) => (
-                  <li key={index} className="flex items-center text-gray-300">
-                    <ShieldCheckIcon className="w-6 h-6 text-primary mr-3" />
+                  <li key={index} className="flex items-center text-gray-300 text-lg">
+                    <ShieldCheckIcon className="w-6 h-6 text-primary mr-3 flex-shrink-0" />
                     {feature}
                   </li>
                 ))}
@@ -181,7 +231,7 @@ export default function Features() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-r from-gray-900 to-secondary rounded-2xl p-12 text-center relative overflow-hidden neon-border">
             <div className="relative z-10">
-              <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+              <h2 className="text-4xl font-bold mb-4">Ready to Get Started?</h2>
               <p className="text-xl mb-8 text-gray-300">Join thousands of creators and professionals</p>
               <a href="/signup" className="button-primary text-lg px-8 py-4 inline-flex items-center">
                 Create Your Page

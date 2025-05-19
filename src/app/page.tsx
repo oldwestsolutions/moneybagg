@@ -18,16 +18,31 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline';
 import SearchBar from './components/SearchBar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Logo from './components/Logo';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [prevScrollPos]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-bg to-gray-900">
       {/* Navigation */}
-      <nav className="fixed w-full bg-dark-bg/90 backdrop-blur-md z-50 border-b border-gray-800/50">
+      <nav className={`fixed w-full bg-dark-bg/90 backdrop-blur-md z-50 border-b border-gray-800/50 transition-transform duration-300 ${
+        visible ? 'translate-y-0' : '-translate-y-full'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
@@ -39,8 +54,8 @@ export default function Home() {
               <div className="w-64">
                 <SearchBar />
               </div>
-              <a href="/features" className="nav-link hover:text-primary transition-colors">Features</a>
-              <a href="/blockchain" className="nav-link hover:text-primary transition-colors">Blockchain</a>
+              <a href="/products" className="nav-link hover:text-primary transition-colors">Products</a>
+              <a href="/pricing" className="nav-link hover:text-primary transition-colors">Pricing</a>
               <a href="/login" className="button-primary bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">Login</a>
             </div>
 
@@ -66,8 +81,8 @@ export default function Home() {
                 <div className="mb-4">
                   <SearchBar />
                 </div>
-                <a href="/features" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary">Features</a>
-                <a href="/blockchain" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary">Blockchain</a>
+                <a href="/products" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary">Products</a>
+                <a href="/pricing" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary">Pricing</a>
                 <a href="/login" className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary">Login</a>
               </div>
             </div>
@@ -99,8 +114,8 @@ export default function Home() {
                 <a href="/signup" className="button-primary text-lg px-8 py-4 bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity">
                   Sign Up & Link
                 </a>
-                <a href="/networks" className="button-secondary text-lg px-8 py-4 border border-gray-700 hover:border-primary transition-colors">
-                  Networks
+                <a href="/features" className="button-secondary text-lg px-8 py-4 border border-gray-700 hover:border-primary transition-colors">
+                  Features
                 </a>
               </div>
               <div className="mt-8 flex items-center space-x-6">
@@ -112,7 +127,7 @@ export default function Home() {
                     <img src="https://images.unsplash.com/photo-1611944212129-29977ae1398c?w=100&h=100&fit=crop&q=80" alt="LinkedIn" className="w-full h-full object-cover" />
                   </div>
                   <div className="w-12 h-12 rounded-full bg-gray-800 border-2 border-dark-bg overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=100&h=100&fit=crop&q=80" alt="Instagram" className="w-full h-full object-cover" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="Instagram" className="w-full h-full object-cover" />
                   </div>
                 </div>
                 <span className="text-gray-400">Connect all your platforms</span>
@@ -143,24 +158,24 @@ export default function Home() {
           <div className="space-y-4">
             {[
               {
-                title: "Latest YouTube Video",
-                icon: "/youtube-icon.svg",
-                color: "from-red-500 to-red-600"
+                title: "YouTube",
+                icon: "https://www.youtube.com/favicon.ico",
+                color: "from-gray-900 to-black"
               },
               {
-                title: "My NFT Collection",
-                icon: "/nft-icon.svg",
-                color: "from-purple-500 to-purple-600"
+                title: "Snapchat",
+                icon: "https://www.snapchat.com/favicon.ico",
+                color: "from-yellow-400 to-yellow-500"
               },
               {
-                title: "DeFi Portfolio",
-                icon: "/defi-icon.svg",
-                color: "from-green-500 to-green-600"
+                title: "TikTok",
+                icon: "https://www.tiktok.com/favicon.ico",
+                color: "from-black to-gray-800"
               },
               {
-                title: "Join My Discord",
-                icon: "/discord-icon.svg",
-                color: "from-indigo-500 to-indigo-600"
+                title: "Instagram",
+                icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png",
+                color: "from-pink-500 via-purple-500 to-orange-500"
               }
             ].map((link, index) => (
               <div 
@@ -200,21 +215,18 @@ export default function Home() {
             {[
               {
                 icon: <LinkIcon className="w-12 h-12 text-primary" />,
-                title: "Unlimited Links",
-                description: "Add as many links as you want to your page",
-                stats: "100+ Link Types"
+                title: "All Your Links",
+                description: "Connect and showcase all your social media and content in one beautiful hub"
               },
               {
                 icon: <SparklesIcon className="w-12 h-12 text-primary" />,
                 title: "Custom Themes",
-                description: "Choose from beautiful themes or create your own",
-                stats: "50+ Themes"
+                description: "Choose from beautiful themes or create your own"
               },
               {
                 icon: <ChartPieIcon className="w-12 h-12 text-primary" />,
                 title: "Analytics",
-                description: "Track clicks and engagement in real-time",
-                stats: "Real-time Stats"
+                description: "Track clicks and engagement in real-time"
               }
             ].map((feature, index) => (
               <div key={index} className="p-6 rounded-2xl bg-card-bg/30 backdrop-blur-sm border border-gray-800/50 hover:border-primary/50 transition-colors">
@@ -223,7 +235,6 @@ export default function Home() {
                 </div>
                 <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
                 <p className="text-gray-400 mb-4">{feature.description}</p>
-                <div className="text-primary font-medium">{feature.stats}</div>
               </div>
             ))}
           </div>
@@ -271,60 +282,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* DeFi Resume Section */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-4xl font-bold mb-6">DeFi Achievement System</h3>
-              <p className="text-xl text-gray-400 mb-8">
-                Track your crypto journey with our gamified achievement system. Showcase your trading prowess, NFT collection, and DeFi contributions.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  'Trading volume milestones',
-                  'NFT collection showcase',
-                  'DeFi protocol contributions',
-                  'Community engagement metrics'
-                ].map((feature, index) => (
-                  <li key={index} className="flex items-center text-gray-300">
-                    <ShieldCheckIcon className="w-6 h-6 text-primary mr-3" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="relative">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 p-1">
-                <div className="w-full h-full rounded-2xl bg-card-bg/50 backdrop-blur-sm border border-gray-800/50 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                      <BoltIcon className="w-16 h-16 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">Level Up</h3>
-                    <p className="text-gray-400 mb-6">Unlock achievements and badges</p>
-                    <div className="flex items-center justify-center text-primary">
-                      <span className="mr-2">View Progress</span>
-                      <ArrowRightIcon className="w-5 h-5" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="section-title">Power Up Your Presence</h2>
-            <p className="section-subtitle">Unleash your potential with cutting-edge features</p>
-          </div>
-        </div>
-      </section>
-
       {/* Pro Portfolio Feature */}
       <section className="py-24 bg-secondary/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -332,21 +289,21 @@ export default function Home() {
             <div className="relative">
               <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 p-1">
                 <div className="w-full h-full rounded-2xl bg-card-bg/50 backdrop-blur-sm border border-gray-800/50 flex items-center justify-center">
-                  <RocketLaunchIcon className="w-32 h-32 text-primary" />
+                  <SparklesIcon className="w-32 h-32 text-primary" />
                 </div>
               </div>
             </div>
             <div>
-              <h3 className="text-4xl font-bold mb-6">Pro Portfolio</h3>
+              <h3 className="text-4xl font-bold mb-6">AI Content Engine</h3>
               <p className="text-xl text-gray-400 mb-8">
-                Craft an elite portfolio that showcases your skills and achievements. Stand out from the crowd with our powerful customization tools.
+                Harness the power of AI to create engaging content that resonates with your audience. Our advanced engine helps you craft the perfect message every time.
               </p>
               <ul className="space-y-4">
                 {[
-                  'Custom themes and layouts',
-                  'Advanced media galleries',
-                  'Interactive elements',
-                  'Mobile-first design'
+                  'AI-powered content generation',
+                  'Smart engagement optimization',
+                  'Trend analysis and insights',
+                  'Performance analytics'
                 ].map((feature, index) => (
                   <li key={index} className="flex items-center text-gray-300">
                     <ShieldCheckIcon className="w-6 h-6 text-primary mr-3" />
@@ -354,6 +311,40 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* VPN Feature */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-4xl font-bold mb-6">Secure VPN Access</h3>
+              <p className="text-xl text-gray-400 mb-8">
+                Browse and manage your content securely with our built-in VPN. Protect your privacy and access content from anywhere in the world.
+              </p>
+              <ul className="space-y-4">
+                {[
+                  'Global server network',
+                  'Military-grade encryption',
+                  'No-logs policy',
+                  'Unlimited bandwidth'
+                ].map((feature, index) => (
+                  <li key={index} className="flex items-center text-gray-300">
+                    <ShieldCheckIcon className="w-6 h-6 text-primary mr-3" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative">
+              <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 p-1">
+                <div className="w-full h-full rounded-2xl bg-card-bg/50 backdrop-blur-sm border border-gray-800/50 flex items-center justify-center">
+                  <ShieldCheckIcon className="w-32 h-32 text-primary" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -363,6 +354,13 @@ export default function Home() {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="relative">
+              <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 p-1">
+                <div className="w-full h-full rounded-2xl bg-card-bg/50 backdrop-blur-sm border border-gray-800/50 flex items-center justify-center">
+                  <ChartBarIcon className="w-32 h-32 text-primary" />
+                </div>
+              </div>
+            </div>
             <div>
               <h3 className="text-4xl font-bold mb-6">Analytics Dashboard</h3>
               <p className="text-xl text-gray-400 mb-8">
@@ -374,47 +372,6 @@ export default function Home() {
                   'Engagement metrics',
                   'Conversion analytics',
                   'Custom reports'
-                ].map((feature, index) => (
-                  <li key={index} className="flex items-center text-gray-300">
-                    <ShieldCheckIcon className="w-6 h-6 text-primary mr-3" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="relative">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 p-1">
-                <div className="w-full h-full rounded-2xl bg-card-bg/50 backdrop-blur-sm border border-gray-800/50 flex items-center justify-center">
-                  <ChartBarIcon className="w-32 h-32 text-primary" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Custom Branding Feature */}
-      <section className="py-24 bg-secondary/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative">
-              <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 p-1">
-                <div className="w-full h-full rounded-2xl bg-card-bg/50 backdrop-blur-sm border border-gray-800/50 flex items-center justify-center">
-                  <PaintBrushIcon className="w-32 h-32 text-primary" />
-                </div>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-4xl font-bold mb-6">Custom Branding</h3>
-              <p className="text-xl text-gray-400 mb-8">
-                Level up your brand with personalized themes and styles. Create a unique identity that resonates with your audience.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  'Custom color schemes',
-                  'Typography controls',
-                  'Logo integration',
-                  'Brand consistency tools'
                 ].map((feature, index) => (
                   <li key={index} className="flex items-center text-gray-300">
                     <ShieldCheckIcon className="w-6 h-6 text-primary mr-3" />
@@ -439,95 +396,67 @@ export default function Home() {
               {
                 name: 'Free',
                 price: '$0',
-                features: ['1 Link Page', 'Basic Analytics', 'Standard Support', 'Basic Themes'],
+                features: [
+                  '5 Link Pages',
+                  'Basic Themes',
+                  'Private Messaging',
+                  'Connect with Friends & Followers',
+                  'Basic Analytics'
+                ],
                 buttonText: 'Get Started'
               },
               {
-                name: 'Pro',
-                price: '$5',
-                features: ['Unlimited Links', 'Advanced Analytics', 'Priority Support', 'Custom Themes', 'Remove Branding'],
-                buttonText: 'Upgrade to Pro',
+                name: 'Standard',
+                price: '$15',
+                features: [
+                  'Everything in Free',
+                  'Unlimited Links',
+                  'Custom Themes',
+                  'AI Content Generator',
+                  'Ad Placement Tools'
+                ],
+                buttonText: 'Upgrade to Standard',
                 popular: true
               },
               {
                 name: 'Premium',
                 price: '$24',
-                features: ['Everything in Pro', 'Team Features', 'API Access', 'Custom Domain', 'Dedicated Support'],
+                features: [
+                  'Everything in Standard',
+                  'Verified Profile Badge',
+                  'Advanced Analytics',
+                  'VPN Access'
+                ],
                 buttonText: 'Go Premium'
               }
             ].map((plan, index) => (
-              <div key={index} className={`pricing-card ${plan.popular ? 'pricing-card-popular' : ''}`}>
-                {plan.popular && (
-                  <span className="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm font-bold">Most Popular</span>
-                )}
-                <h3 className="text-2xl font-bold mt-4 mb-2">{plan.name}</h3>
-                <div className="text-4xl font-bold mb-6">{plan.price}<span className="text-lg text-gray-500">/month</span></div>
-                <ul className="space-y-4 mb-8">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-center text-gray-300">
-                      <ShieldCheckIcon className="w-5 h-5 text-primary mr-2" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <button className={`w-full ${plan.popular ? 'button-primary' : 'button-secondary'}`}>
-                  {plan.buttonText}
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-24 bg-secondary/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="section-title">Champion Testimonials</h2>
-            <p className="section-subtitle">Hear from the legends who've leveled up their game</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                quote: "LinkFolio has completely transformed my digital presence. The analytics are next-level!",
-                author: "Alex 'The Pro' Johnson",
-                role: "Pro Gamer"
-              },
-              {
-                quote: "This platform is a game-changer. The customization options are insane!",
-                author: "Sarah 'Pixel' Chen",
-                role: "Content Creator"
-              },
-              {
-                quote: "The best investment for my brand. The features are absolutely legendary.",
-                author: "Mike 'StreamKing' Ross",
-                role: "Streamer"
-              }
-            ].map((testimonial, index) => (
-              <div key={index} className="testimonial-card">
-                <BoltIcon className="w-12 h-12 text-primary mb-4" />
-                <p className="text-gray-300 mb-6">{testimonial.quote}</p>
-                <div>
-                  <p className="font-bold text-gray-200">{testimonial.author}</p>
-                  <p className="text-gray-400 text-sm">{testimonial.role}</p>
+              <div key={index} className={`pricing-card ${plan.popular ? 'pricing-card-popular' : ''} flex flex-col h-full`}>
+                <div className="flex-grow">
+                  {plan.popular && (
+                    <span className="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm font-bold">Most Popular</span>
+                  )}
+                  <h3 className="text-2xl font-bold mt-4 mb-2">{plan.name}</h3>
+                  <div className="text-4xl font-bold mb-6">{plan.price}<span className="text-lg text-gray-500">/month</span></div>
+                  <ul className="space-y-4">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-center text-gray-300">
+                        <ShieldCheckIcon className="w-5 h-5 text-primary mr-2" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="mt-8">
+                  <button className={`w-full py-3 px-6 rounded-lg font-medium transition-all ${
+                    plan.popular 
+                      ? 'bg-gradient-to-r from-primary to-accent hover:opacity-90' 
+                      : 'border border-gray-700 hover:border-primary'
+                  }`}>
+                    {plan.buttonText}
+                  </button>
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-gray-900 to-secondary rounded-2xl p-12 text-center relative overflow-hidden neon-border">
-            <div className="relative z-10">
-              <h2 className="text-3xl font-bold mb-4">Ready to Level Up?</h2>
-              <p className="text-xl mb-8 text-gray-300">Join the elite players using LinkFolio</p>
-              <button className="button-primary text-lg px-8 py-4">
-                Start Your Journey
-              </button>
-            </div>
           </div>
         </div>
       </section>
@@ -543,8 +472,8 @@ export default function Home() {
             <div>
               <h4 className="font-bold text-gray-200 mb-4">Platform</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="hover:text-primary">Features</a></li>
-                <li><a href="#" className="hover:text-primary">Pricing</a></li>
+                <li><a href="/features" className="hover:text-primary">Features</a></li>
+                <li><a href="/pricing" className="hover:text-primary">Pricing</a></li>
                 <li><a href="#" className="hover:text-primary">Enterprise</a></li>
               </ul>
             </div>
@@ -566,7 +495,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-800/50 mt-12 pt-8 text-center text-gray-500">
-            <p>© 2024 LinkFolio. All rights reserved.</p>
+            <p>© 2024 moneyba.gg. All rights reserved.</p>
           </div>
         </div>
       </footer>

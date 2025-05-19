@@ -11,13 +11,20 @@ import {
 
 export default function SignUp() {
   const [step, setStep] = useState(1);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [bio, setBio] = useState('');
+  const [theme, setTheme] = useState('Dark Modern');
+  const [linkTitle, setLinkTitle] = useState('');
+  const [linkUrl, setLinkUrl] = useState('');
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-dark-bg to-gray-900 flex items-center justify-center px-4">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            Create Your Link Page
+            {username ? `Welcome, ${username}!` : 'Create Your Link Page'}
           </h2>
           <p className="mt-2 text-gray-400">
             Join thousands of creators and professionals
@@ -56,6 +63,8 @@ export default function SignUp() {
                 <input
                   type="text"
                   id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   className="block w-full pl-10 pr-3 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="username"
                 />
@@ -73,6 +82,8 @@ export default function SignUp() {
                 <input
                   type="email"
                   id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="block w-full pl-10 pr-3 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="you@example.com"
                 />
@@ -90,6 +101,8 @@ export default function SignUp() {
                 <input
                   type="password"
                   id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="block w-full pl-10 pr-3 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="••••••••"
                 />
@@ -130,26 +143,14 @@ export default function SignUp() {
         {step === 2 && (
           <div className="space-y-6">
             <div>
-              <label htmlFor="page-title" className="block text-sm font-medium text-gray-300">
-                Page Title
-              </label>
-              <div className="mt-1">
-                <input
-                  type="text"
-                  id="page-title"
-                  className="block w-full px-3 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="Your Name or Brand"
-                />
-              </div>
-            </div>
-
-            <div>
               <label htmlFor="bio" className="block text-sm font-medium text-gray-300">
                 Bio
               </label>
               <div className="mt-1">
                 <textarea
                   id="bio"
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
                   rows={3}
                   className="block w-full px-3 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="Tell people about yourself..."
@@ -164,6 +165,8 @@ export default function SignUp() {
               <div className="mt-1">
                 <select
                   id="theme"
+                  value={theme}
+                  onChange={(e) => setTheme(e.target.value)}
                   className="block w-full px-3 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 >
                   <option>Dark Modern</option>
@@ -203,6 +206,8 @@ export default function SignUp() {
                 <input
                   type="text"
                   id="link-title"
+                  value={linkTitle}
+                  onChange={(e) => setLinkTitle(e.target.value)}
                   className="block w-full px-3 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="Link Title"
                 />
@@ -220,6 +225,8 @@ export default function SignUp() {
                 <input
                   type="url"
                   id="link-url"
+                  value={linkUrl}
+                  onChange={(e) => setLinkUrl(e.target.value)}
                   className="block w-full pl-10 pr-3 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="https://"
                 />

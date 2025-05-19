@@ -6,20 +6,20 @@ import { Analytics } from '@vercel/analytics/react';
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Moneyba.gg | Your Professional Digital Hub",
+  title: "moneyba.gg | Your Professional Digital Hub",
   description: "Transform your digital presence into a powerful, unified hub. Connect your social media, DeFi achievements, and professional profiles in one stunning, customizable space. Perfect for creators, professionals, and crypto enthusiasts.",
   keywords: "digital presence, link management, DeFi portfolio, social media hub, professional profile, crypto achievements, NFT showcase, creator platform",
   openGraph: {
-    title: "Moneyba.gg | Your Professional Digital Hub",
+    title: "moneyba.gg | Your Professional Digital Hub",
     description: "Transform your digital presence into a powerful, unified hub. Connect your social media, DeFi achievements, and professional profiles in one stunning, customizable space.",
     url: "https://moneyba.gg",
-    siteName: "Moneyba.gg",
+    siteName: "moneyba.gg",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Moneyba.gg - Your Professional Digital Hub",
+        alt: "moneyba.gg - Your Professional Digital Hub",
       },
     ],
     locale: "en_US",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Moneyba.gg | Your Professional Digital Hub",
+    title: "moneyba.gg | Your Professional Digital Hub",
     description: "Transform your digital presence into a powerful, unified hub. Connect your social media, DeFi achievements, and professional profiles in one stunning, customizable space.",
     images: ["/og-image.jpg"],
   },
